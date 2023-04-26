@@ -177,8 +177,29 @@ That should be all the setup required. `http://localhost:3001/` should be the UR
 
 ## Screenshots
 
+Empty home page
+![image](https://user-images.githubusercontent.com/16064366/234564898-ef908dd5-a461-47f5-af69-6e4be88dab02.png)
 
+Creating a new warehouse
+![image](https://user-images.githubusercontent.com/16064366/234565668-3cbe3be3-49c8-4094-89dd-8ca7deae49ed.png)
 
+Generated new warehouse with a shelf count of 0
+![image](https://user-images.githubusercontent.com/16064366/234565787-378d1686-3273-4615-bbcd-215267a98f9b.png)
+
+Click on the new warehouse entry to see warehouse details and add a new shelf
+![image](https://user-images.githubusercontent.com/16064366/234565996-26646141-70cf-4130-9ce8-4e81c60322bb.png)
+
+Several car shelfs displayed in a warehouse detail
+![image](https://user-images.githubusercontent.com/16064366/234566159-b31399e5-6310-494c-ad49-186467b42a44.png)
+
+Filled home page
+![image](https://user-images.githubusercontent.com/16064366/234566420-c5d71127-d0f8-41a5-aa2c-3143e79ad2fb.png)
+
+Warehouse update page
+![image](https://user-images.githubusercontent.com/16064366/234566537-fbb444b9-135b-4814-abd1-6aaf0f729c19.png)
+
+Shelf update page
+![image](https://user-images.githubusercontent.com/16064366/234566772-c02e70f6-8fb7-4280-a6c8-a4e7dbc555d1.png)
 
 ## Testing
 To be added

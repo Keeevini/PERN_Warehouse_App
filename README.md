@@ -63,10 +63,47 @@ CREATE TABLE shelves (
 );
 ```
 
+### API
+
+| :---: | :---:| :---: |
+|CRUD Operation | Method | URL |
+| ----------- | ----------- | ------ |
+| :--- | :---| :--- |
+| Retrieve all warehouses | GET | /api/v1/warehouses
+| Retrieve one warehouse | GET | /api/v1/warehouses/:id |
+| Create warehouse | POST | /api/v1/warehouses |
+| Update warehouse | PUT | /api/v1/warehouses/:id |
+| Delete warehouse | DELETE | /api/v1/warehouses/:id |
+
 
 
 ## Installation/Usage
 To be added
+
+### PostgreSQL Database
+```SQL
+CREATE DATABASE inventory_app;
+```
+
+```SQL
+CREATE TABLE warehouses (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	last_updated TIMESTAMPTZ
+);
+```
+
+```SQL
+CREATE TABLE shelves (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id),
+	name VARCHAR(50) NOT NULL,
+	zone INT NOT NULL check(zone >= 1 and zone <= 12),
+	last_updated TIMESTAMPTZ
+);
+```
+
+
 
 ## Testing
 To be added

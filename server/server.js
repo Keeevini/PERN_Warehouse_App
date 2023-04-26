@@ -7,8 +7,8 @@ const morgan = require("morgan");
 const app = express() 
 
 // Middleware
-//app.use(cors());
-//app.use(morgan("dev"));
+app.use(cors());
+app.use(morgan("dev"));
 app.use(express.json());
 
 // Get all warehouses
@@ -44,7 +44,7 @@ app.get("/api/v1/warehouses/:id", async (req, res) => {
 		);
 
 		res.status(200).json({
-			status: "succes",
+			status: "success",
 			data: {
 				warehouse: warehouse.rows[0],
 				shelves: shelves.rows,
@@ -58,7 +58,7 @@ app.get("/api/v1/warehouses/:id", async (req, res) => {
 
 // Create a warehouse
 app.post("/api/v1/warehouses", async (req, res) => {
-	console.log(req);
+	console.log(req.body);
 
 	try {
 		const results = await db.query(
@@ -143,7 +143,7 @@ app.get('/', function (req, res) {
 // Will do more shelves later
 
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
 	console.log(`server is running and listening on port ${port}`);
 });

@@ -31,6 +31,7 @@ A web based application that keeps track of physical inventory placement.
 **Client side**
 - React app
 - React-router-dom
+- Bootstrap
 - Axios
 
 ## Design

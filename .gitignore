@@ -1,5 +1,6 @@
 # ignore ALL client files for now
-client/
+client/node_modules/
+client/.env
 
 # SERVER
 

@@ -65,10 +65,9 @@ CREATE TABLE shelves (
 
 ### API
 
-| :---: | :---:| :---: |
 |CRUD Operation | Method | URL |
 | ----------- | ----------- | ------ |
-| :--- | :---| :--- |
+| :--- | :--- | :--- |
 | Retrieve all warehouses | GET | /api/v1/warehouses
 | Retrieve one warehouse | GET | /api/v1/warehouses/:id |
 | Create warehouse | POST | /api/v1/warehouses |

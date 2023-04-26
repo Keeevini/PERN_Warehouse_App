@@ -7,8 +7,8 @@ const morgan = require("morgan");
 const app = express() 
 
 // Middleware
-app.use(cors());
-app.use(morgan("dev"));
+//app.use(cors());
+//app.use(morgan("dev"));
 app.use(express.json());
 
 // Get all warehouses
@@ -26,7 +26,7 @@ app.get("/api/v1/warehouses", async (req, res) => {
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
 
@@ -38,7 +38,7 @@ app.get("/api/v1/warehouses/:id", async (req, res) => {
 			[req.params.id]
 		);
 
-		const shelves = await.db.query(
+		const shelves = await db.query(
 			"SELECT * FROM shelves WHERE warehouse_id = $1",
 			[req.params.id]
 		);
@@ -51,14 +51,14 @@ app.get("/api/v1/warehouses/:id", async (req, res) => {
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
 
 
 // Create a warehouse
 app.post("/api/v1/warehouses", async (req, res) => {
-	console.log(req.body);
+	console.log(req);
 
 	try {
 		const results = await db.query(
@@ -74,12 +74,12 @@ app.post("/api/v1/warehouses", async (req, res) => {
 		});
 
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
 
 // Update warehouse
-apps.put("/api/v1/warehouses/:id", async (req, res) => {
+app.put("/api/v1/warehouses/:id", async (req, res) => {
 	try {
 		const results = await db.query(
 			"UPDATE warehouses SET name = $1, last_updated = CURRENT_TIMESTAMP where id = $2 returning *",
@@ -93,7 +93,7 @@ apps.put("/api/v1/warehouses/:id", async (req, res) => {
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
 
@@ -108,7 +108,7 @@ app.delete("/api/v1/warehouses/:id", async (req, res) => {
 			status: "success",
 		});
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
 
@@ -126,9 +126,18 @@ app.post("/api/v1/warehouses/:id/addShelf", async (req, res) => {
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		return res.status(400).json({ error: err.toString() });
 	}
 });
+
+app.get('/', function (req, res) {
+  console.log("blank page");
+
+  res.status(200).json({
+			status: "success",
+		});
+});
+
 
 
 // Will do more shelves later

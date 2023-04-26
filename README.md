@@ -35,9 +35,33 @@ A web based application that keeps track of physical inventory placement.
 - Axios
 
 ## Design
+The following includes assumptions made and interpretations of the prompt. This is a high level concept of the application.
 
-To be added.
+### Database
 
+Since we have multiple warehouses and shelves that correlate to each warehouse, we will create 2 tables. All entries will include a last updated to keep track of when changes occurred.
+
+The warehouses table will keep track of warehouses and also allow adding more properties to a warehouse in the future.
+
+```SQL
+CREATE TABLE warehouses (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	last_updated TIMESTAMPTZ
+);
+```
+
+The shelves table will keep track of all the shelves. Each shelf must correspond to a warehouse by id. Each shelf also must be in a zone and the zones are labeled 1 to 12. Thus, we will include a constraint to make sure the zone is a valid number.
+
+```SQL
+CREATE TABLE shelves (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id),
+	name VARCHAR(50) NOT NULL,
+	zone INT NOT NULL check(zone >= 1 and zone <= 12),
+	last_updated TIMESTAMPTZ
+);
+```
 
 
 

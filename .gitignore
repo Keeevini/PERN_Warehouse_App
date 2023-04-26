@@ -1,2 +1,3 @@
 # ignore ALL files in server for now
 server/
+client/

@@ -153,6 +153,18 @@ app.get("/api/v1/shelves/:id", async (req, res) => {
 // Create a shelf (uses an existing warehouse's id)
 app.post("/api/v1/warehouses/:id/addShelf", async (req, res) => {
 	try {
+
+		// Check for max shelves
+		const shelfCount = await db.query(
+			"SELECT COUNT(*) FROM shelves WHERE (warehouse_id = $1) AND (zone = $2);",
+			[req.params.id, req.body.zone]
+		);
+
+		console.log(shelfCount.rows[0].count);
+		if (shelfCount.rows[0].count >= 10) {
+			throw new Error('Maximum shelves for the zone reached');
+		}
+
 		const results = await db.query(
 			"INSERT INTO shelves (warehouse_id, name, zone, last_updated) values ($1, $2, $3, CURRENT_TIMESTAMP) returning *;",
 			[req.params.id, req.body.name, req.body.zone]
@@ -171,6 +183,18 @@ app.post("/api/v1/warehouses/:id/addShelf", async (req, res) => {
 // Update shelf
 app.put("/api/v1/shelves/:id", async (req, res) => {
 	try {
+
+		// Check for max shelves
+		const shelfCount = await db.query(
+			"SELECT COUNT(*) FROM shelves WHERE (warehouse_id = $1) AND (zone = $2);",
+			[req.body.warehouse_id, req.body.zone]
+		);
+		
+		console.log(shelfCount.rows[0].count);
+		if (shelfCount.rows[0].count >= 10) {
+			throw new Error('Maximum shelves for the zone reached');
+		}
+
 		const results = await db.query(
 			"UPDATE shelves SET name = $1, warehouse_id = $2, zone = $3, last_updated = CURRENT_TIMESTAMP where id = $4 returning *",
 			[req.body.name, req.body.warehouse_id, req.body.zone, req.params.id]

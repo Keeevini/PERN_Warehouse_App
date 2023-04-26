@@ -29,7 +29,7 @@ const AddWarehouse = () => {
 							onChange={(e) => setName(e.target.value)}
 							type="text"
 							className="form-control"
-							placeholder="name"
+							placeholder="Warehouse Name"
 						/>
 					</div>
 					<button
@@ -37,7 +37,7 @@ const AddWarehouse = () => {
 						type="submit"
 						className="btn btn-primary"
 					>
-						Add
+						Create Warehouse
 					</button>
 				</div>
 			</form>

@@ -6,10 +6,11 @@
 ## Project Description
 
 A web based application that keeps track of physical inventory placement.
+
 Outline of the README:
 - Basic features and tech stack
 - Conceptual designs and thoughts
-- Installation/Usage
+- Installation/usage
 - Screenshots
 
 ### Basic Website Features:
@@ -170,7 +171,9 @@ PORT=3001
 
 If you choose to run your backend server on a different port than 3000, simply change the baseURL in all the files in the apis folder.
 
-That should be all the setup required.
+### Usage
+That should be all the setup required. `http://localhost:3001/` should be the URL of the home page. The following section of screenshots should be a guide if there are any questions on how to use the web application.
+
 
 ## Screenshots
 

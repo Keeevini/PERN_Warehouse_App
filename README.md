@@ -82,13 +82,18 @@ CREATE TABLE shelves (
 
 The only variation is creating a shelf. This is done because a shelf must be created in an existing warehouse. An additional create shelf feature in the home page can be created in the future.
 
+### Pages
+
+
+
+
+
 ### Assumptions:
 In conclusion, these are the assumptions made when coming up with the design.
 
 - The location of the shelf within a zone does not matter since it is not specified. Only the count matters (cannot exceed 10 per zone)
 - When a warehouse is removed, all shelves related will also no longer exist
 - Since a shelf must be created in a warehouse, adding shelves can only be done in a warehouse details page
-
 
 ## Installation/Usage
 To be added

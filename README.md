@@ -106,7 +106,7 @@ In conclusion, these are the assumptions made when coming up with the design.
 - When a warehouse is removed, all shelves related will also no longer exist (be removed)
 - Since a shelf must be created in a warehouse, adding shelves can only be done in a warehouse details page
 - The unique name of a shelf is the same as the display name
-- Warehouses do have unique names
+- Warehouses do not have unique names
 
 ### Future:
 Features not implemented so far include:

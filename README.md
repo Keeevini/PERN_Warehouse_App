@@ -51,18 +51,17 @@ CREATE TABLE warehouses (
 );
 ```
 
-The shelves table will keep track of all the shelves. Each shelf must correspond to a warehouse by id. Each shelf also must be in a zone and the zones are labeled 1 to 12. Thus, we will include a constraint to make sure the zone is a valid number.
+The shelves table will keep track of all the shelves. Each shelf must correspond to a warehouse by id. Each shelf also must be in a zone and the zones are labeled 1 to 12. Thus, we will include a constraint to make sure the zone is a valid number. Additionally, when a warehouse is deleted, we assume all shelves related to the warehouse will be removed since the warehouse no longer exists.
 
 ```SQL
 CREATE TABLE shelves (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id),
+	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id) ON DELETE CASCADE,
 	name VARCHAR(50) NOT NULL,
 	zone INT NOT NULL check(zone >= 1 and zone <= 12),
 	last_updated TIMESTAMPTZ
 );
 ```
-
 ### API
 
 |CRUD Operation | Method | URL |
@@ -73,8 +72,22 @@ CREATE TABLE shelves (
 | Update warehouse | PUT | /api/v1/warehouses/:id |
 | Delete warehouse | DELETE | /api/v1/warehouses/:id |
 
+|CRUD Operation | Method | URL |
+| :--- | :--- | :--- |
+| Retrieve all shelves | GET | /api/v1/shelves
+| Retrieve one shelf | GET | /api/v1/shelves/:id |
+| Create shelf | POST | /api/v1/warehouses/:id |
+| Update shelf | PUT | /api/v1/shelves/:id |
+| Delete shelf | DELETE | /api/v1/shelves/:id |
 
+The only variation is creating a shelf. This is done because a shelf must be created in an existing warehouse. An additional create shelf feature in the home page can be created in the future.
 
+### Assumptions:
+In conclusion, these are the assumptions made when coming up with the design.
+
+- The location of the shelf within a zone does not matter since it is not specified. Only the count matters (cannot exceed 10 per zone)
+- When a warehouse is removed, all shelves related will also no longer exist
+- Since a shelf must be created in a warehouse, adding shelves can only be done in a warehouse details page
 
 
 ## Installation/Usage
@@ -96,7 +109,7 @@ CREATE TABLE warehouses (
 ```SQL
 CREATE TABLE shelves (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id),
+	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id) ON DELETE CASCADE,
 	name VARCHAR(50) NOT NULL,
 	zone INT NOT NULL check(zone >= 1 and zone <= 12),
 	last_updated TIMESTAMPTZ

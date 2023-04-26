@@ -2,22 +2,20 @@ import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ShelfFinder from '../apis/ShelfFinder';
-import WarehouseFinder from '../apis/WarehouseFinder';
 import { ShelvesContext } from '../context/ShelvesContext';
 
-const Shelves = ({ warehouse }) => {
+const ShelfList = (props) => {
 	const { shelves, setShelves } = useContext(ShelvesContext);
 	let history = useNavigate();
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await WarehouseFinder.get(`/${warehouse.id}`);
+				const response = await ShelfFinder.get("/");
 				setShelves(response.data.data.shelves);
 			} catch (err) {}
 		};
 
 		fetchData();
-
 	}, []);
 
 	const handleDelete = async (e, id) => {
@@ -45,6 +43,7 @@ const Shelves = ({ warehouse }) => {
 				<thead>
 					<tr className="bg-primary">
 					<th scope="col">Shelf</th>
+					<th scope="col">Warehouse</th>
 					<th scope="col">Zone</th>
 					<th scope="col">Last Updated</th>
 					<th scope="col">Edit</th>
@@ -57,6 +56,7 @@ const Shelves = ({ warehouse }) => {
 						return (
 							<tr>
 								<td>{shelf.name}</td>
+								<td>{shelf.warehouse_name}</td>
 								<td>{shelf.zone}</td>
 								<td>{shelf.last_updated}</td>
 								<td>
@@ -84,4 +84,4 @@ const Shelves = ({ warehouse }) => {
 	);
 };
 
-export default Shelves;
+export default ShelfList;

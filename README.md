@@ -51,13 +51,13 @@ CREATE TABLE warehouses (
 );
 ```
 
-The shelves table will keep track of all the shelves. Each shelf must correspond to a warehouse by id. Each shelf also must be in a zone and the zones are labeled 1 to 12. Thus, we will include a constraint to make sure the zone is a valid number. Additionally, when a warehouse is deleted, we assume all shelves related to the warehouse will be removed since the warehouse no longer exists.
+The shelves table will keep track of all the shelves. Each shelf must correspond to a warehouse by id. Additionally, when a warehouse is deleted, we assume all shelves related to the warehouse will be removed since the warehouse no longer exists. Each shelf must have a unique name. Each shelf also must be in a zone and the zones are labeled 1 to 12. Thus, we will include a constraint to make sure the zone is a valid number.
 
 ```SQL
 CREATE TABLE shelves (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id) ON DELETE CASCADE,
-	name VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL UNIQUE,
 	zone INT NOT NULL check(zone >= 1 and zone <= 12),
 	last_updated TIMESTAMPTZ
 );
@@ -80,20 +80,28 @@ CREATE TABLE shelves (
 | Update shelf | PUT | /api/v1/shelves/:id |
 | Delete shelf | DELETE | /api/v1/shelves/:id |
 
-The only variation is creating a shelf. This is done because a shelf must be created in an existing warehouse. An additional create shelf feature in the home page can be created in the future.
+The only variation is creating a shelf. This is done because a shelf must be created in an existing warehouse. An additional create shelf feature in the home page could be created in the future.
 
 ### Pages
 
+|Page Name | Function | URL |
+| :--- | :--- | :--- |
+| Home Page | Form for creating a warehouse, Warehouse List, Shelf List | /
+| Warehouse Detail | Form for creating a shelf, Shelf List | /warehouses/:id |
+| Update Warehouse | Form for updating a warehouse | /warehouses/:id/update |
+| Update Shelf | Form for updating a shelf | /shelves/:id/update |
 
-
+A home page would allow for easy viewing of available warehouses and existing shelves. A warehouse detail page allows for adding shelves.
 
 
 ### Assumptions:
 In conclusion, these are the assumptions made when coming up with the design.
 
 - The location of the shelf within a zone does not matter since it is not specified. Only the count matters (cannot exceed 10 per zone)
-- When a warehouse is removed, all shelves related will also no longer exist
+- When a warehouse is removed, all shelves related will also no longer exist (be removed)
 - Since a shelf must be created in a warehouse, adding shelves can only be done in a warehouse details page
+- The unique name of a shelf is the same as the display name
+- Warehouses do have unique names
 
 ## Installation/Usage
 To be added
@@ -115,7 +123,7 @@ CREATE TABLE warehouses (
 CREATE TABLE shelves (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	warehouse_id BIGINT NOT NULL REFERENCES warehouses(id) ON DELETE CASCADE,
-	name VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL UNIQUE,
 	zone INT NOT NULL check(zone >= 1 and zone <= 12),
 	last_updated TIMESTAMPTZ
 );

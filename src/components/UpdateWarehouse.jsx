@@ -14,7 +14,7 @@ const UpdateWarehouse = (props) => {
 		const fetchData = async () => {
 			const response = await WarehouseFinder.get(`/${id}`);
 			console.log(response.data.data);
-			setName(response.data.data.restaurant.name);
+			setName(response.data.data.warehouse.name);
 		};
 
 		fetchData();
@@ -47,7 +47,7 @@ const UpdateWarehouse = (props) => {
 					onClick={handleSubmit}
 					className="btn btn-primary"
 				>
-					Submit
+					Update Warehouse
 				</button>
 			</form>
 		</div>

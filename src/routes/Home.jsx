@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../components/Header';
 import AddWarehouse from '../components/AddWarehouse';
 import WarehouseList from '../components/WarehouseList';
+import ShelfList from '../components/ShelfList';
 
 const Home = () => {
 	return (
@@ -10,6 +11,7 @@ const Home = () => {
 			<Header />
 			<AddWarehouse />
 			<WarehouseList />
+			<ShelfList />
 		</div>
 	);
 };

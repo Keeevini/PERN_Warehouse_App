@@ -5,6 +5,7 @@ import { WarehousesContext } from "../context/WarehousesContext";
 import WarehouseFinder from "../apis/WarehouseFinder";
 import Shelves from "../components/Shelves";
 import AddShelf from "../components/AddShelf";
+import ShelfList from '../components/ShelfList';
 
 const WarehouseDetailPage = () => {
 	const { id } = useParams();
@@ -34,9 +35,7 @@ const WarehouseDetailPage = () => {
 					<h1 className="text-center display-1">
 						{selectedWarehouse.warehouse.name}
 					</h1>
-					<div className="mt-3">
-						<Shelves shelves={selectedWarehouse.shelves} />
-					</div>
+					<Shelves warehouse={selectedWarehouse.warehouse} />
 					<AddShelf />
 				</>
 			)}

@@ -58,8 +58,6 @@ app.get("/api/v1/warehouses/:id", async (req, res) => {
 
 // Create a warehouse
 app.post("/api/v1/warehouses", async (req, res) => {
-	console.log(req.body);
-
 	try {
 		const results = await db.query(
 			"INSERT INTO warehouses (name, last_updated) values ($1, CURRENT_TIMESTAMP) returning *",
@@ -118,7 +116,6 @@ app.get("/api/v1/shelves", async (req, res) => {
 		const shelvesData = await db.query(
 			"SELECT * FROM shelves LEFT JOIN (SELECT name AS warehouse_name, id AS copied_id FROM warehouses GROUP BY id) warehouses ON shelves.warehouse_id = copied_id"
 		);
-		console.log(shelvesData);
 		res.status(200).json({
 			status: "success",
 			results: shelvesData.rows.length,
@@ -160,7 +157,6 @@ app.post("/api/v1/warehouses/:id/addShelf", async (req, res) => {
 			[req.params.id, req.body.zone]
 		);
 
-		console.log(shelfCount.rows[0].count);
 		if (shelfCount.rows[0].count >= 10) {
 			throw new Error('Maximum shelves for the zone reached');
 		}
@@ -190,7 +186,6 @@ app.put("/api/v1/shelves/:id", async (req, res) => {
 			[req.body.warehouse_id, req.body.zone]
 		);
 		
-		console.log(shelfCount.rows[0].count);
 		if (shelfCount.rows[0].count >= 10) {
 			throw new Error('Maximum shelves for the zone reached');
 		}

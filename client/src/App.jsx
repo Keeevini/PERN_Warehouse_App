@@ -13,7 +13,7 @@ const App = () => {
 		<WarehousesContextProvider>
 			<ShelvesContextProvider>
 				<div className="container">
-					<Router>
+					<Router basename='/PERN_Warehouse_App'>
 						<Routes>
 							<Route exact path="/" element={<Home/>}/>
 							<Route exact path="/warehouses/:id/update" element={<UpdateWarehousePage/>}/>

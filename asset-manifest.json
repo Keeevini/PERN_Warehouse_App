@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/PERN_Warehouse_App/static/js/main.bc290ac0.js",
+    "index.html": "/PERN_Warehouse_App/index.html",
+    "main.bc290ac0.js.map": "/PERN_Warehouse_App/static/js/main.bc290ac0.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.bc290ac0.js"
+  ]
+}

@@ -7,11 +7,11 @@
 
 A web based application that keeps track of physical inventory placement.
 
-Dummy website hosted on: https://keeevini.github.io/PERN_Warehouse_App/
+Dummy website hosted on: https://keeevini.github.io/PERN_Warehouse_App/  
 Since this is only client side, it cannot load data or write to a database.
 
-Other dummy pages that can be accessed:
-https://keeevini.github.io/PERN_Warehouse_App/warehouses/0/update
+Other dummy pages that can be accessed:  
+https://keeevini.github.io/PERN_Warehouse_App/warehouses/0/update  
 https://keeevini.github.io/PERN_Warehouse_App/shelves/0/update
 
 **Outline of the README:**
